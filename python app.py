@@ -4,13 +4,8 @@ from datetime import datetime
 from flask import Flask, request, jsonify, render_template_string
 from flask_cors import CORS
 
-# ---------------------------
-# YOUR GEMINI API KEY (hard-coded)
-# ---------------------------
 GEMINI_API_KEY = "AIzaSyAQYQRc80LvZD34_dp2N6F61Mr6Xt9EGWk"
-# ---------------------------
 
-# Import Google GenAI SDK (install with pip install google-genai)
 try:
     from google import genai
 except Exception as e:
@@ -21,13 +16,9 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 app = Flask(__name__)
 CORS(app)
 
-# Simple in-memory sessions -> { session_id: [ {role, text, ts} ] }
 SESSIONS = {}
 MODEL = "gemini-2.5-flash"
 
-# -----------------------------
-# BEAUTIFUL UI / UX with Key Benefits & Integrations
-# -----------------------------
 INDEX_HTML = r"""
 <!doctype html>
 <html lang="en">
@@ -337,9 +328,6 @@ async function sendMessage() {
 </html>
 """
 
-# -----------------------------
-# Server routes
-# -----------------------------
 def build_prompt(history, new_message):
     """Simple chat prompt builder matching UI style."""
     lines = []
@@ -393,3 +381,4 @@ def reset():
 if __name__ == "__main__":
     print("🚀 Gemini Chatbot (rich UI) running at http://127.0.0.1:5000")
     app.run(debug=True)
+
